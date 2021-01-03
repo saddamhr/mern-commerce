@@ -157,4 +157,3 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     })
   }
 }
-
