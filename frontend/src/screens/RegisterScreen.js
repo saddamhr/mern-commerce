@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { From, Button, Row, Col, Form } from 'react-bootstrap'
+import { Button, Row, Col, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -29,10 +29,10 @@ const RegisterScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    if(password !== confirmPassword) {
-        setMessage('Password do not match')
-    } else{
-        dispatch(register(name, email, password))
+    if (password !== confirmPassword) {
+      setMessage('Password do not match')
+    } else {
+      dispatch(register(name, email, password))
     }
   }
 
@@ -43,7 +43,7 @@ const RegisterScreen = ({ location, history }) => {
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
-      <Form.Group controlId="name">
+        <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="name"
