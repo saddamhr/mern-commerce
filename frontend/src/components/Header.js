@@ -10,10 +10,6 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  useEffect(() => {
-    console.log(userInfo)
-  }, [])
-
   const logoutHandler = () => {
     dispatch(logout())
   }
