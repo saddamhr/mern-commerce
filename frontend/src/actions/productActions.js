@@ -20,11 +20,13 @@ import {
   PRODUCT_CREATE_REVIEW_FAIL,
 } from '../constants/productConstants'
 
-export const listProducts = (keyword='') => async (dispatch) => {
+export const listProducts = (keyword = '', pageNumber = '') => async (
+  dispatch
+) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST })
 
-    const { data } = await axios.get(`/api/products?keyword=${keyword}`)
+    const { data } = await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`)
 
     dispatch({
       type: PRODUCT_LIST_SUCCESS,
@@ -94,7 +96,6 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
   }
 }
 
-
 export const createProduct = () => async (dispatch, getState) => {
   try {
     dispatch({
@@ -111,11 +112,11 @@ export const createProduct = () => async (dispatch, getState) => {
       },
     }
 
-    const {data} = await axios.post(`/api/products/`, {}, config)
+    const { data } = await axios.post(`/api/products/`, {}, config)
 
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
-      payload: data
+      payload: data,
     })
   } catch (error) {
     dispatch({
@@ -145,11 +146,15 @@ export const updateProduct = (product) => async (dispatch, getState) => {
       },
     }
 
-    const {data} = await axios.put(`/api/products/${product._id}`, product , config)
+    const { data } = await axios.put(
+      `/api/products/${product._id}`,
+      product,
+      config
+    )
 
     dispatch({
       type: PRODUCT_UPDATE_SUCCESS,
-      payload: data
+      payload: data,
     })
   } catch (error) {
     dispatch({
@@ -162,7 +167,10 @@ export const updateProduct = (product) => async (dispatch, getState) => {
   }
 }
 
-export const createProductReview = (productId, review) => async (dispatch, getState) => {
+export const createProductReview = (productId, review) => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch({
       type: PRODUCT_CREATE_REVIEW_REQUEST,
@@ -179,10 +187,10 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
       },
     }
 
-    await axios.post(`/api/products/${productId}/reviews`, review , config)
+    await axios.post(`/api/products/${productId}/reviews`, review, config)
 
     dispatch({
-      type: PRODUCT_CREATE_REVIEW_SUCCESS
+      type: PRODUCT_CREATE_REVIEW_SUCCESS,
     })
   } catch (error) {
     dispatch({
